@@ -1,0 +1,3 @@
+code1.py: invalid literal for int() with base 10: '3I33'
+code2.py: name 'I' is not defined
+code3.py: True

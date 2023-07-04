@@ -1,0 +1,11 @@
+Write a program in python that takes a string of numbers as input.
+The string of numbers should be multiplied with eachother and the function should return true if the result of the multiplied numbers are larger than the number that is inputed in the string divided by three.
+If any other characted than a string is inputed, they should be ignored.
+
+For example:
+
+calculate('111') should return False, as 111/3 = 37 is larger than 1*1*1 = 1
+
+calculate('999') should return True, as 999/3 = 333 is smaller than 9*9*9 = 729
+
+calculate('9xaidcjhdsoicj99') should also return True, as non-numerical characters are ignored.
