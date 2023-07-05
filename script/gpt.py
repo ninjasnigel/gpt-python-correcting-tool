@@ -12,9 +12,9 @@ with open('openai.key') as f:
 
 def get_gpt_feedback(feedback_str):
     system_msg = "You provided with student code, the result of the test ran on the code, and the potential errors \
-                        You are to aid a tecaher in the grading of the coding assignement. You will do this by discussing \
+                        You are to aid a teacher in the grading of the coding assignement. You will do this by discussing \
                         what is good and what is bad in the student code. Explain what the student did right or wrong. \
-                        ist the good and bad things in bullet points. Discuss and comment the readability, efficiency, \
+                        List the good and bad things in bullet points. Discuss and comment the readability, efficiency, \
                         structure, and style of the code in these bullet points. Feel free to mention other relevant things.  \
                         Do not give any suggestions on how to improve the code. IMPORTANT: add #### before each bullet point. "
     conversation = [
