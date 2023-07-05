@@ -16,7 +16,7 @@ def get_gpt_feedback(feedback_str):
                         what is good and what is bad in the student code. Explain what the student did right or wrong. \
                         ist the good and bad things in bullet points. Discuss and comment the readability, efficiency, \
                         structure, and style of the code in these bullet points. Feel free to mention other relevant things.  \
-                        Do not give any suggestions on how to improve the code."
+                        Do not give any suggestions on how to improve the code. IMPORTANT: add #### before each bullet point. "
     conversation = [
         {"role": "system", "content": system_msg},
         {"role": "user", "content": feedback_str}
