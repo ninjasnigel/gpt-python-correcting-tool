@@ -10,7 +10,7 @@ crash_str = "Student code :warning: **CRASHED** :warning: when running tests, th
 delim = "#--#"
 
 # Directory containing student code
-context_dir = "assignment.txt"
+context_dir = "description.txt"
 
 import os
 import importlib.util
