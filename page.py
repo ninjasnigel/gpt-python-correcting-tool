@@ -102,9 +102,9 @@ if selected_page == "Test Configuration":
     # Text input for test configuration
     description_value = ""
 
-    #if os.path.isfile("description.txt"):
-    #    with open("description.txt", "r") as f:
-    #        description_value = f.read()
+    if os.path.isfile("description.txt"):
+        with open("description.txt", "r") as f:
+            description_value = f.read()
 
     description = st.text_area("Enter your test configuration here:", value=description_value, height=200)
 
@@ -113,6 +113,20 @@ if selected_page == "Test Configuration":
         st.session_state.test_count = 0
     if "tests" not in st.session_state:
         st.session_state.tests = {}
+            # Load existing tests from file
+        if os.path.isfile("test_cases.py"):
+            with open("test_cases.py", "r") as f:
+                lines = f.readlines()
+                # Update test_count
+                st.session_state.test_count = len(lines)
+                for i, line in enumerate(lines):
+                    # Parse the test input and expected output
+                    test_input, expected_output = ast.literal_eval(line[line.find("(")+1:line.find(")")])
+                    # Store them in the session state
+                    st.session_state.tests[i] = {
+                        "input": str(test_input),
+                        "expected_output": str(expected_output)
+                    }
 
     # Load existing tests from file
     if os.path.isfile("test_cases.py"):
