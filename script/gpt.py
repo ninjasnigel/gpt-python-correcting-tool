@@ -4,12 +4,17 @@ openai.api_version = "2023-05-15"
 GPT_MODEL_token = "gpt-3.5-turbo"
 GPT_MODEL = "gpt-35-turbo"
 
-with open('openai.base') as f:
-    openai.api_base = f.read().strip()
+try:
+    with open('openai.base') as f:
+        openai.api_base = f.read().strip()
 
-with open('openai.key') as f:
-    openai.api_key = f.read().strip()
-
+    with open('openai.key') as f:
+        openai.api_key = f.read().strip()
+except: # Use streamlit secrets
+    import streamlit as st
+    openai.api_key = st.secrets["openai_key"]
+    openai.api_base = st.secrets["openai_base"]
+    
 system_msg_old = "You provided with student code, the result of the test ran on the code, and the potential errors \
                         You are to aid a teacher in the grading of the coding assignement. You will do this by discussing \
                         what is good and what is bad in the student code. Explain what the student did right or wrong. \
