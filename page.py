@@ -101,11 +101,10 @@ if selected_page == "Test Configuration":
 
     # Text input for test configuration
     description_value = ""
-    """
-    if os.path.isfile("description.txt"):
-        with open("description.txt", "r") as f:
-            description_value = f.read()
-    """
+
+    #if os.path.isfile("description.txt"):
+    #    with open("description.txt", "r") as f:
+    #        description_value = f.read()
 
     description = st.text_area("Enter your test configuration here:", value=description_value, height=200)
 
