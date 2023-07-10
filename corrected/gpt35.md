@@ -22,17 +22,14 @@ Student code :warning: **CRASHED** :warning: when running tests, the following e
  ### GPT feedback: 
 
 #### Good:
-- The function identifies and ignores non-numerical characters in the input string.
-- The function uses a loop to multiply each digit in the string.
-- The function calculates the value of dividing the input number by 3, which is necessary to make a comparison with the product.
+- The code correctly multiplies the digits in the string and ignores non-numerical characters, as specified in the prompt.
+- The code correctly calculates the result of dividing the input string by three, as specified in the prompt.
 
 #### Bad:
-- The variable name `str` is not a good choice because it is a keyword in Python. It can be confusing and may lead to errors.
-- The code doesn't handle the case where the input string is empty.
-- The code doesn't handle the case where the input string doesn't have any digit, leading to a division by zero.
-- The `divided_by_three` variable is not used in the conditional expression in the return. It is unnecessary to compute it if not being used.
+- The variable name "str" is not descriptive and should be changed to something like "input_str".
+- The function should have a docstring describing its purpose and usage.
+- There is an error in the code where it tries to iterate over an integer instead of a string, which causes the program to crash.
 
 #### Other:
-- The function lacks proper documentation, making it hard to understand what it is supposed to do and how to use it.
-- The function could benefit from adding input validation and error handling to prevent issues when the input doesn't match the expected format.
-- It is not efficient to calculate the result of dividing the input string by three since this can be done once, outside of the function, instead of being recalculated every time the function is called.
+- Instead of using division, it's better to compare the multiplied result to one-third of the integer value of the input string using integer comparison.
+- Using a try-except block to catch non-integer inputs would be a good addition to prevent errors and unwanted behavior.

@@ -48,9 +48,17 @@ def write_feedback_on_file(directory, filename, test=test, save_dir="corrected/"
     except:
         file.write(f"Error importing {filename}: {traceback.format_exc()}\n")
         return
+    
+    # Load function name from function_name.txt
+    function_name = ""
+    try:
+        with open("function_name.txt", "r") as f:
+            function_name = f.read()
+    except:
+        print('no function name')
 
     # Get the multiply function from the module
-    multiply_func = getattr(module, "multiply", None)
+    multiply_func = getattr(module, function_name, None)
     
     context = get_context(context_dir)
     feedback_str = context  +"\n\n ### Student code: \n\n" +delim +"\n" \

@@ -96,7 +96,11 @@ elif selected_page == "Test Results":
     else:
         st.write("No test results available yet.")
 
+if "refresh_count" not in st.session_state:
+    st.session_state.refresh_count = 0
+
 if selected_page == "Test Configuration":
+    st.session_state.refresh_count += 1
     st.title("Test Configuration Page")
 
     # Text input for test configuration
@@ -107,6 +111,7 @@ if selected_page == "Test Configuration":
             description_value = f.read()
 
     description = st.text_area("Enter your test configuration here:", value=description_value, height=200)
+    function_name = st.text_input("Enter the function name for your tests:")
 
     # Initialize session_state if not already done
     if "test_count" not in st.session_state:
@@ -115,64 +120,78 @@ if selected_page == "Test Configuration":
         st.session_state.tests = {}
             # Load existing tests from file
         if os.path.isfile("test_cases.py"):
-            with open("test_cases.py", "r") as f:
-                lines = f.readlines()
-                # Update test_count
-                st.session_state.test_count = len(lines)
-                for i, line in enumerate(lines):
-                    # Parse the test input and expected output
-                    test_input, expected_output = ast.literal_eval(line[line.find("(")+1:line.find(")")])
-                    # Store them in the session state
-                    st.session_state.tests[i] = {
-                        "input": str(test_input),
-                        "expected_output": str(expected_output)
-                    }
-
-    # Load existing tests from file
-    if os.path.isfile("test_cases.py"):
-        with open("test_cases.py", "r") as f:
-            lines = f.readlines()
-            # Update test_count
-            st.session_state.test_count = len(lines)
-            for i, line in enumerate(lines):
-                # Parse the test input and expected output
-                test_input, expected_output = ast.literal_eval(line[line.find("(")+1:line.find(")")])
-                # Store them in the session state
-                st.session_state.tests[i] = {
-                    "input": str(test_input),
-                    "expected_output": str(expected_output)
-                }
-
-    # If button pressed, increment count
-    if st.button("Add Test"):
-        st.session_state.test_count += 1
+            print('Im updating :tf:')
+            # Load existing tests from file
+            if os.path.isfile("test_cases.py"):
+                with open("test_cases.py", "r") as f:
+                    lines = f.readlines()
+                    # Update test_count
+                    st.session_state.test_count = len(lines)
+                    for i, line in enumerate(lines):
+                        # Parse the test input and expected output
+                        test_input, expected_output = ast.literal_eval(line[line.find("(")+1:line.find(")")])
+                        # Store them in the session state
+                        st.session_state[f"test_{i}_input"] = str(test_input)
+                        st.session_state[f"test_{i}_expected_output"] = str(expected_output)
+                        st.session_state.refresh_count += 1
 
     # Display text inputs for each test
     for i in range(st.session_state.test_count):
         with st.container():
             cols = st.columns(2)
-            test_input = st.session_state.tests[i]["input"] if i in st.session_state.tests else ""
-            expected_output = st.session_state.tests[i]["expected_output"] if i in st.session_state.tests else ""
-            st.session_state.tests[i] = {
-                "input": cols[0].text_input(f"Test {i+1} Input:", value=test_input),
-                "expected_output": cols[1].text_input(f"Test {i+1} Expected Output:", value=expected_output)
-            }
+            # Get test input and expected output from session_state or initialize to ""
+            test_input = st.session_state.get(f"test_{i}_input", "")
+            expected_output = st.session_state.get(f"test_{i}_expected_output", "")
+            # Store new inputs in the session_state
+            st.session_state[f"test_{i}_input"] = cols[0].text_input(f"Test {i+1} Input:", value=test_input)
+            st.session_state[f"test_{i}_expected_output"] = cols[1].text_input(f"Test {i+1} Expected Output:", value=expected_output)
+            st.session_state.refresh_count += 1
+
+    cols = st.columns(4)
+
+    # If button pressed, increment count
+    if cols[0].button("Add Test"):
+        st.session_state.test_count += 1
+        st.session_state.refresh_count += 1
+
+    if cols[3].button("Cosmetic refresh"):
+        st.session_state.refresh_count += 1
+
+    if cols[2].button("Clear Configuration"):
+        # Reset description
+        description = st.text_area("Enter your test configuration here:", value="", height=200)
+
+        # Reset session_state variables
+        st.session_state.test_count = 0
+        for i in range(len(st.session_state)):
+            if f"test_{i}_input" in st.session_state:
+                del st.session_state[f"test_{i}_input"]
+            if f"test_{i}_expected_output" in st.session_state:
+                del st.session_state[f"test_{i}_expected_output"]
+
+        st.success("Configuration cleared successfully!")
+        st.session_state.refresh_count += 1
 
     # Add save configuration button
-    if st.button("Save Configuration"):
+    if cols[1].button("Save Configuration"):
         # Check if we have at least one test and description
-        if st.session_state.test_count > 0 and description:
+        if st.session_state.test_count > 0 and description and function_name:
             # Save the inputs from the big text box to a string
             with open("description.txt", "w") as f:
                 f.write(description)
 
+            with open("function_name.txt", "w") as f:
+                f.write(function_name)
+
             # Save tests as tuples
             with open("test_cases.py", "w") as f:
                 for i in range(st.session_state.test_count):
-                    input_ = safely_literal_eval(st.session_state.tests[i]["input"])
-                    expected_output = safely_literal_eval(st.session_state.tests[i]["expected_output"])
+                    input_ = safely_literal_eval(st.session_state[f"test_{i}_input"])
+                    expected_output = safely_literal_eval(st.session_state[f"test_{i}_expected_output"])
                     f.write(f"test_{i} = ({input_}, {expected_output})\n")
 
+
             st.success("Configuration saved successfully!")
+            st.session_state.refresh_count += 1
         else:
-            st.error("Please ensure that a test is added and a description is written before saving.")
+            st.error("Please ensure that a test is added, a description is written and a test function is defined before saving.")

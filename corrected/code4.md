@@ -34,14 +34,15 @@ Student code :white_check_mark: **PASSED** :white_check_mark:  all tests!
  ### GPT feedback: 
 
 #### Good:
-- The code correctly converts a string of numbers into an integer and ignores any non-numeric characters.
-- The code utilizes a separate helper function to perform multiplication and another to clean up the input, which aids in readability and organization.
+- The code separates different functionalities into separate functions.
+- The code uses descriptive function and variable names.
+- The code checks if the input string contains only numerical digits before performing the calculation.
 
 #### Bad:
-- The function and variable name "multiply" is misleading, as the function only performs multiplication and comparison.
-- The "fix_str" function could be simplified by using Python's built-in function "isdigit()".
-- In the "multiply" function, the if statement on line 15 could be simplified to "if not fixed_str: return False" to remove an unnecessary else block.
+- The function `fix_str()` could be simplified by using a regular expression.
+- The function `multiply()` could have better error handling, to handle scenarios where the input string does not contain any numerical digits.
 
 #### Other:
-- The use of comments to separate different parts of the code is appreciated and helps with readability.
-- The code passes all provided test cases, which demonstrates that the code is working correctly for the inputs given. However, the code should be further tested to ensure proper functionality and error handling for unexpected inputs.
+- The code has good readability and structure.
+- The code is scalable if there is need to implement additional features later on.
+- The variable naming convention (using snake_case) is consistent with Python's style guide.

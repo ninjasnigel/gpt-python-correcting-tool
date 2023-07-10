@@ -15,21 +15,24 @@ def multiply(num):
  Test results: 
 Student code :warning: **CRASHED** :warning: when running tests, the following error was printed : 
 
- invalid literal for int() with base 10: '9xaidcjhdsoicj99' 
+ 'test_3' 
 
 
 
  ### GPT feedback: 
 
 #### Good:
-- The function uses a loop to iterate through the string input and check each digit if it's a number and to multiply them.
-- The function has a condition to check if the input is a string of numbers, and if any non-numerical character is available, it ignores such character. 
+- The code seems to handle the condition mentioned in the prompt, such as ignoring non-numerical characters.
+- The code uses a loop to iterate through the digits in the input string and multiplication to find the product of the digits. 
 
 #### Bad:
-- The function uses "str" as its parameter name, which is not the most appropriate name to use since "str" is a built-in function in Python. It is recommended to use a different name.
-- The function name is also "multiply," which could be misleading since the function should return a boolean value indicating whether the product is greater than the input divided by 3.
-- The function doesn't handle invalid inputs well, such as a case where the input is an empty string. This could result in errors while running the function.
+- The function name is same as the function argument name "multiply(str)".
+- It's not a good practice to catch the error and print the error log in the function. The error log should be raised and handled in the caller's space.
+- The function doesn't handle the case when the input string contains only non-numerical characters. In such cases, the program will crash with invalid syntax error as str() cannot be applied to a non-string object.
+- The function doesn't handle cases when the input numerical string is empty.
 
 #### Other:
-- The code crashes when the input string contains non-numerical characters that can't be converted into numbers using "int" function. The function needs to handle such invalid cases to avoid crashing.
-- It would be better to separate the calculation of the product and the comparison from the loop using variables.
+- The code would be more readable if it includes comments to explain the purpose of the code. 
+- The function should return True/False instead of 1/0 as it is more readable and consistent with the expected output. 
+- The function should have input type specified in the documentation string. 
+- It's always good to have some basic test cases included in the code to ensure its functionality.

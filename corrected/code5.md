@@ -18,12 +18,12 @@ Student code :skull: **FAILED** :skull: one or more tests
 
 #### Good:
 - None
+
 #### Bad:
-- The student did not follow the instructions given in the prompt.
-- The code does not perform the intended task and the function returns False for all inputs.
-- The function name is the same as the argument, which can create ambiguity.
-- Instead of implementing the intended function, the student chose to print a message instead.
+- The function defined by the student, `multiply(num)`, does not fulfill the assignment requirements or return the expected output for the provided tests.
+- The `print()` statement included in the function is irrelevant to the task at hand and does not add value to the program.
+- The function does not handle non-numerical characters in the input string as instructed in the assignment.
+
 #### Other:
-- The code lacks comments and variable names that can indicate the purpose of the function.
-- There is no code formatting, which can make it difficult to read and debug the code.
-- The code does not handle the error that occurs when the input string contains no numeric characters, which can lead to unexpected results.
+- It is recommended to choose a descriptive name for functions and variables that reflects their purpose in the program.
+- The program does not have any error handling or input validation to check if the input is a valid string of numbers. It is generally a good practice to include error handling to prevent the program from crashing or producing unintended outputs.

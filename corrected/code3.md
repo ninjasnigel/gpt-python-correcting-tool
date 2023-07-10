@@ -14,16 +14,17 @@ Student code :white_check_mark: **PASSED** :white_check_mark:  all tests!
  ### GPT feedback: 
 
 #### Good:
-- The function takes a string of numbers as input and successfully extracts only the numerical characters from it.
-- The function uses the `join()` and `isdigit()` methods to manipulate the input string.
-- The function uses the `eval()` and `join()` methods to multiply all the extracted numerical characters of the input string together.
-- The function correctly returns `True` or `False` depending on whether the result of the multiplied numbers is larger than or smaller than the number that is inputted in the string divided by three.
-- The function passed all test cases provided.
+- The function input parameter is descriptive and meaningful.
+- The use of list comprehension to extract only digits from the input string is efficient.
+- The use of the `eval()` function to multiply the digits is clever.
 
 #### Bad:
-- The function name `multiply()` is not very descriptive of what the function does, it may be better to rename it to `calculate()` as described in the problem statement or to something more descriptive like `is_result_larger()`.
+- The function is named the same as the input parameter, which can be confusing.
+- Function is only one line which makes it harder to read and debug.
+- The use of `eval()` function can be dangerous and slow when used with untrusted input.
 
 #### Other:
-- The function could benefit from commenting to explain what each block of code does.
-- Instead of using `eval()` to multiply the numerical characters, the function could use a loop to iterate through each character and keep a running product of the numerical characters encountered. This may be more efficient.
-- The function should include error handling to handle cases where an empty string is provided as input.
+- The conditional statement can be written as a single line instead of using an if-else statement.
+- Consider using a try-except block to catch non-digit inputs instead of ignoring them. 
+- Comments explaining the function's purpose and usage would improve readability.
+- The function could benefit from more comprehensive tests.
