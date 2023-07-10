@@ -9,3 +9,8 @@ calculate('111') should return False, as 111/3 = 37 is larger than 1*1*1 = 1
 calculate('999') should return True, as 999/3 = 333 is smaller than 9*9*9 = 729
 
 calculate('9xaidcjhdsoicj99') should also return True, as non-numerical characters are ignored.
+
+The function should me named multiply(str)
+
+def multiply(str):
+    return False # Implement function

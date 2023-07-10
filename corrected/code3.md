@@ -9,25 +9,17 @@ def multiply(num):
  Test results: 
 Student code :white_check_mark: **PASSED** :white_check_mark:  all tests!  
 
+
+
  ### GPT feedback: 
+
 #### Good:
-- The program uses a single function, `multiply()`, to perform the necessary calculations and comparisons.
-- The function uses a list comprehension to filter out non-digit characters before processing the string.
-- The function uses `eval()` to perform the multiplication operation on a list of digits.
+- The function takes a string input and removes non numerical characters, making it flexible for various inputs.
+- The function uses list comprehension to remove non numerical characters, making it concise and efficient.
 
 #### Bad:
-- The function name, `multiply()`, is not very descriptive of what the function actually does. 
-- The function does not handle input validation, and non-numeric characters are simply removed from the string without any warning or error message. 
-- The function uses a ternary operator (i.e. `True if ... else False`) unnecessarily instead of returning the result of the comparison directly.
+- The input parameter for the function is named poorly as it uses the keyword 'str' which is also a built-in function in Python. This can cause naming conflicts and confusion.
+- The eval() function is used to multiply the numbers in the string which is not encouraged, as it can be a security vulnerability if user input is directly evaluated.
 
-#### Readability:
-- Overall, the code is relatively easy to read and understand due to the simplicity of the `multiply()` function. 
-- The list comprehension used to remove non-digit characters might be difficult to understand for beginners.
-
-#### Efficiency:
-- The code appears to be relatively efficient, since the `join()` method and `eval()` function are only called once each.
-
-#### Structure/Style:
-- The code follows PEP 8 style guidelines for the most part, with consistent indentation, use of whitespace, and appropriate function naming conventions.
-- However, the variable name `num` used in the `multiply()` function could be more informative - it's not immediately clear what the variable represents without reading the code more carefully. 
-- The comment delimiters used in the code (`#--#`) are unconventional and could be confusing to someone not familiar with them.
+#### Other:
+- The function should have proper documentation and comments to explain the purpose and inner workings of the code for readability and maintainability.

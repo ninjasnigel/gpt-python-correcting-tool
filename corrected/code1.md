@@ -13,21 +13,25 @@ def multiply(num):
 #--#
 
  Test results: 
-Student code :warning: **CRASHED** :warning: when running tests, the following error was printed: : invalid literal for int() with base 10: '3I33' 
+Student code :warning: **CRASHED** :warning: when running tests, the following error was printed : 
+
+ invalid literal for int() with base 10: '3I33' 
+
+
 
  ### GPT feedback: 
+
 #### Good:
-- The code uses a function to perform the desired operation.
-- The function uses a loop to iterate over the digits in the input string.
-- The code correctly ignores non-numeric characters.
+- The function checks whether each character in the input string is a digit and only multiplies the digits together, ignoring any non-digit characters.
+- The function uses a for loop to iterate over each character in the string, allowing it to handle input of any length.
 
 #### Bad:
-- The function does not handle the case where the input string is empty. This can cause the code to crash or produce incorrect results.
-- The function assumes that the input string contains only digits or non-numeric characters. If the input string contains any other characters (e.g., spaces), the code may crash or produce incorrect results.
-- The function does not have input validation, which can be a potential issue if the input to the code is not well-formed. For example, if the input is an integer instead of a string, the code may produce incorrect results.
-- The function returns a boolean value, but the requirement of the problem is to return an integer value (either 0 or 1).
-- The name of the function does not describe its purpose clearly. A better name for the function would be `is_product_greater_than_third`.
+- The function uses the parameter name `num`, which is confusing because it is actually a string of characters that may or may not represent a numerical value.
+- The function does not handle cases where the input string contains leading zeros, which could cause incorrect calculations.
+- The function does not handle cases where the input string is empty, which could cause errors when trying to divide by zero.
+- The function crashes when attempting to convert the input string to an integer if it contains non-digit characters.
 
-#### Other comments:
-- The code lacks comments to explain the purpose of the function and how it works.
-- The code does not follow consistent indentation, which can make it harder to read and understand.
+#### Other:
+- The function could benefit from more descriptive variable names to make it easier to understand what each variable represents.
+- The function could be improved by checking for the presence of leading zeros and empty input strings and returning an appropriate value or raising an error before attempting any calculations.
+- The function could be made more flexible by allowing the caller to specify the divisor to use instead of always dividing by 3.

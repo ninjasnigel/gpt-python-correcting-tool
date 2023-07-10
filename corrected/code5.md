@@ -9,21 +9,27 @@ def multiply(num):
  Test results: 
 Student code :skull: **FAILED** :skull: one or more tests  
 
+ :x: Input 9999999999 should return True 
+
+ :x: Input 99 should return True 
+
+ :x: Input '9hejärjagivägen?9' should return True 
+ 
+
  ### GPT feedback: 
+
 #### Good:
-- None
+- There is no good in the student code.
 
 #### Bad:
-- The function `multiply()` does not perform the required task. It only prints a message and returns false.
+- The student code does not implement the specified requirements of the task.
+- The function does not take a string of numbers as input and multiply them with each other.
+- The function does not compare the result of the multiplication with the number that is inputed in the string divided by three.
+- The function does not handle non-numeric characters as specified in the task.
+- The function does not return the correct output.
 
-#### Readability:
-- The code is readable, but the function name `multiply()` is misleading as it does not actually perform any multiplication.
-
-#### Efficiency:
-- No comments can be made on the efficiency of the code as it does not perform the required task.
-
-#### Structure:
-- The code consists of only one function that needs to be modified for the desired outcome. 
-
-#### Style:
-- The code has no PEP 8 violations.
+#### Other:
+- The function has a poorly chosen name, as it is the same as the function name specified in the task.
+- The function has unnecessary print statements that do not aid in achieving the specified requirements of the task.
+- The function lacks proper documentation for what it is supposed to do and how it is supposed to be used.
+- The function could benefit from better variable naming for the input parameter.

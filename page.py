@@ -3,7 +3,8 @@ import os
 
 from script.correction import *
 from script.gpt import *
-from tests.tests import *
+from script.tests import *
+from pagetexts import *
 
 # Create a header menu with selectbox for page navigation
 pages = ["Home", "File Selection", "Run Tests", "Test Results"]
@@ -15,7 +16,8 @@ delim = "#--#"
 # Display content depending on selected page
 if selected_page == "Home":
     st.title("Home Page")
-    st.write("Welcome to the home page!")
+    st.markdown(homepage_description)
+    st.image("https://media.giphy.com/media/3o7aDcz6Yulr061Z9m/giphy.gif")
 
 elif selected_page == "File Selection":
     st.title("File Selection Page")
@@ -42,11 +44,23 @@ elif selected_page == "Run Tests":
     # Button to trigger the tests
     if st.button("Run Tests"):
         st.write("Running tests...")
-    
-        # Run tests on files in directory
-        run_test_on_dir(save_py_file_dir, test, save_dir=corrected_dir)
+        files_for_correction = get_files_for_correction(save_py_file_dir)
+        progress_bar = st.progress(0)
+        # Create a placeholder for text
+        status_text = st.empty()
+        total_files = len(files_for_correction)
+        for index, files in enumerate(files_for_correction):
+            # Corrected progress percentage calculation
+            progress_percentage = (index + 1) / total_files
+            write_feedback_on_file(save_py_file_dir, files, test=test, save_dir=corrected_dir)
+            
+            # Update progress bar
+            progress_bar.progress(progress_percentage)
 
-        # Print finished testing
+            # Update text in the placeholder
+            status_text.text(f"{index+1} out of {total_files} files processed.")
+
+            # Print finished testing
         st.write("Finished running tests!")
         
         # Get list of markdown files
