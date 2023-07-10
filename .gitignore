@@ -1,3 +1,4 @@
 *.key
 *.base
 *__
+*.pyc

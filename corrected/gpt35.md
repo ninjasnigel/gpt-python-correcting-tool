@@ -22,13 +22,17 @@ Student code :warning: **CRASHED** :warning: when running tests, the following e
  ### GPT feedback: 
 
 #### Good:
-- The code correctly identifies and multiplies only the digits in the input string
-- The code correctly calculates the value of the input string divided by three
+- The function identifies and ignores non-numerical characters in the input string.
+- The function uses a loop to multiply each digit in the string.
+- The function calculates the value of dividing the input number by 3, which is necessary to make a comparison with the product.
 
 #### Bad:
-- The code is missing a check to ensure that the input string contains at least one digit
-- The code assumes that the input string contains only digits and will crash if a non-digit character is encountered (as seen in the test case where the input string contains letters)
+- The variable name `str` is not a good choice because it is a keyword in Python. It can be confusing and may lead to errors.
+- The code doesn't handle the case where the input string is empty.
+- The code doesn't handle the case where the input string doesn't have any digit, leading to a division by zero.
+- The `divided_by_three` variable is not used in the conditional expression in the return. It is unnecessary to compute it if not being used.
 
 #### Other:
-- The name of the function `multiply` is somewhat misleading, as the function is not just multiplying the input string
-- The error message `int' object is not iterable` suggests that the code is trying to iterate over an integer value somewhere, which is not allowed. It is possible that this is related to the division operation where an integer is being divided by 3, which can result in a float value that cannot be iterated over.
+- The function lacks proper documentation, making it hard to understand what it is supposed to do and how to use it.
+- The function could benefit from adding input validation and error handling to prevent issues when the input doesn't match the expected format.
+- It is not efficient to calculate the result of dividing the input string by three since this can be done once, outside of the function, instead of being recalculated every time the function is called.

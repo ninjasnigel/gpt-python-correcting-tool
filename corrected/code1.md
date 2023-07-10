@@ -15,23 +15,21 @@ def multiply(num):
  Test results: 
 Student code :warning: **CRASHED** :warning: when running tests, the following error was printed : 
 
- invalid literal for int() with base 10: '3I33' 
+ invalid literal for int() with base 10: '9xaidcjhdsoicj99' 
 
 
 
  ### GPT feedback: 
 
 #### Good:
-- The function checks whether each character in the input string is a digit and only multiplies the digits together, ignoring any non-digit characters.
-- The function uses a for loop to iterate over each character in the string, allowing it to handle input of any length.
+- The function uses a loop to iterate through the string input and check each digit if it's a number and to multiply them.
+- The function has a condition to check if the input is a string of numbers, and if any non-numerical character is available, it ignores such character. 
 
 #### Bad:
-- The function uses the parameter name `num`, which is confusing because it is actually a string of characters that may or may not represent a numerical value.
-- The function does not handle cases where the input string contains leading zeros, which could cause incorrect calculations.
-- The function does not handle cases where the input string is empty, which could cause errors when trying to divide by zero.
-- The function crashes when attempting to convert the input string to an integer if it contains non-digit characters.
+- The function uses "str" as its parameter name, which is not the most appropriate name to use since "str" is a built-in function in Python. It is recommended to use a different name.
+- The function name is also "multiply," which could be misleading since the function should return a boolean value indicating whether the product is greater than the input divided by 3.
+- The function doesn't handle invalid inputs well, such as a case where the input is an empty string. This could result in errors while running the function.
 
 #### Other:
-- The function could benefit from more descriptive variable names to make it easier to understand what each variable represents.
-- The function could be improved by checking for the presence of leading zeros and empty input strings and returning an appropriate value or raising an error before attempting any calculations.
-- The function could be made more flexible by allowing the caller to specify the divisor to use instead of always dividing by 3.
+- The code crashes when the input string contains non-numerical characters that can't be converted into numbers using "int" function. The function needs to handle such invalid cases to avoid crashing.
+- It would be better to separate the calculation of the product and the comparison from the loop using variables.

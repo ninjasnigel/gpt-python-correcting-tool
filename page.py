@@ -5,9 +5,10 @@ from script.correction import *
 from script.gpt import *
 from script.tests import *
 from pagetexts import *
+import ast
 
 # Create a header menu with selectbox for page navigation
-pages = ["Home", "File Selection", "Run Tests", "Test Results"]
+pages = ["Home", "File Selection", "Run Tests", "Test Results", "Test Configuration"]
 selected_page = st.selectbox("Choose a page", pages)
 save_py_file_dir = "for_correction/"
 corrected_dir = "corrected/"
@@ -69,6 +70,9 @@ elif selected_page == "Run Tests":
         # Store markdown files in session state
         st.session_state['markdown_files'] = markdown_files
 
+        if st.button("Results"):
+            selected_page = "Test Results"
+
 elif selected_page == "Test Results":
     st.title("Test Results Page")
     
@@ -92,6 +96,68 @@ elif selected_page == "Test Results":
     else:
         st.write("No test results available yet.")
 
-else:
-    st.title("About Page")
-    st.write("Information about this app.")
+if selected_page == "Test Configuration":
+    st.title("Test Configuration Page")
+
+    # Text input for test configuration
+    description_value = ""
+    if os.path.isfile("description.txt"):
+        with open("description.txt", "r") as f:
+            description_value = f.read()
+
+    description = st.text_area("Enter your test configuration here:", value=description_value, height=200)
+
+    # Initialize session_state if not already done
+    if "test_count" not in st.session_state:
+        st.session_state.test_count = 0
+    if "tests" not in st.session_state:
+        st.session_state.tests = {}
+
+    # Load existing tests from file
+    if os.path.isfile("test_cases.py"):
+        with open("test_cases.py", "r") as f:
+            lines = f.readlines()
+            # Update test_count
+            st.session_state.test_count = len(lines)
+            for i, line in enumerate(lines):
+                # Parse the test input and expected output
+                test_input, expected_output = ast.literal_eval(line[line.find("(")+1:line.find(")")])
+                # Store them in the session state
+                st.session_state.tests[i] = {
+                    "input": str(test_input),
+                    "expected_output": str(expected_output)
+                }
+
+    # If button pressed, increment count
+    if st.button("Add Test"):
+        st.session_state.test_count += 1
+
+    # Display text inputs for each test
+    for i in range(st.session_state.test_count):
+        with st.container():
+            cols = st.columns(2)
+            test_input = st.session_state.tests[i]["input"] if i in st.session_state.tests else ""
+            expected_output = st.session_state.tests[i]["expected_output"] if i in st.session_state.tests else ""
+            st.session_state.tests[i] = {
+                "input": cols[0].text_input(f"Test {i+1} Input:", value=test_input),
+                "expected_output": cols[1].text_input(f"Test {i+1} Expected Output:", value=expected_output)
+            }
+
+    # Add save configuration button
+    if st.button("Save Configuration"):
+        # Check if we have at least one test and description
+        if st.session_state.test_count > 0 and description:
+            # Save the inputs from the big text box to a string
+            with open("description.txt", "w") as f:
+                f.write(description)
+
+            # Save tests as tuples
+            with open("test_cases.py", "w") as f:
+                for i in range(st.session_state.test_count):
+                    input_ = safely_literal_eval(st.session_state.tests[i]["input"])
+                    expected_output = safely_literal_eval(st.session_state.tests[i]["expected_output"])
+                    f.write(f"test_{i} = ({input_}, {expected_output})\n")
+
+            st.success("Configuration saved successfully!")
+        else:
+            st.error("Please ensure that a test is added and a description is written before saving.")
