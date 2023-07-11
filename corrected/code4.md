@@ -34,15 +34,15 @@ Student code :white_check_mark: **PASSED** :white_check_mark:  all tests!
  ### GPT feedback: 
 
 #### Good:
-- The code separates different functionalities into separate functions.
-- The code uses descriptive function and variable names.
-- The code checks if the input string contains only numerical digits before performing the calculation.
+- The code is well organized into separate functions for different sub-tasks, which makes it easy to read and debug.
+- The code checks for non-numerical characters and ignores them, as required by the problem statement.
+- The code returns False if the input string has no valid numerical characters, which is a good way to handle invalid input.
 
 #### Bad:
-- The function `fix_str()` could be simplified by using a regular expression.
-- The function `multiply()` could have better error handling, to handle scenarios where the input string does not contain any numerical digits.
+- The function name `multiply` is too general and does not clearly convey its purpose. A more descriptive name like `compare_multiplication_result` or `check_multiplication` would be better.
+- The `fix_str` function could be simplified using a list comprehension instead of a for loop and if-else statements. For example, `fixed_str = ''.join([char for char in num if char.isdigit()])`.
+- The function calculates the fixed string and its multiplication separately, which is less efficient than calculating the multiplication as we fix the string. A better approach would be to combine these steps into a single loop that calculates both at once.
 
 #### Other:
-- The code has good readability and structure.
-- The code is scalable if there is need to implement additional features later on.
-- The variable naming convention (using snake_case) is consistent with Python's style guide.
+- The code could benefit from additional comments to explain the purpose of each function and the overall logic of the program.
+- The variable name `num` used in `fix_str` is misleading, since the argument is actually a string and not a number. A better name would be `num_str` or `input_str`.

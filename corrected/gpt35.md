@@ -22,14 +22,12 @@ Student code :warning: **CRASHED** :warning: when running tests, the following e
  ### GPT feedback: 
 
 #### Good:
-- The code correctly multiplies the digits in the string and ignores non-numerical characters, as specified in the prompt.
-- The code correctly calculates the result of dividing the input string by three, as specified in the prompt.
+- The program accurately multiplies all digits in the string and ignores non-numerical characters.
 
 #### Bad:
-- The variable name "str" is not descriptive and should be changed to something like "input_str".
-- The function should have a docstring describing its purpose and usage.
-- There is an error in the code where it tries to iterate over an integer instead of a string, which causes the program to crash.
+- The program crashes due to a runtime error in the implementation.
+- The solution did not follow the prompt accurately, as it would divide the entire input string by 3, instead of the intended integer parsed from the string.
 
 #### Other:
-- Instead of using division, it's better to compare the multiplied result to one-third of the integer value of the input string using integer comparison.
-- Using a try-except block to catch non-integer inputs would be a good addition to prevent errors and unwanted behavior.
+- The variable name used in the function is the same as the function name. It is generally bad form since it may cause confusion later on in the program.
+- It would be more efficient to avoid casting the entire input string to an int and use a flag to check the presence of numerical digits.
